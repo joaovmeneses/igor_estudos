@@ -5,24 +5,37 @@ let contatos = []
 let ctt = document.querySelector('div#ctt')
 
 function salvar() {
-    let contato = {
-        nome: nome.value,
-        sobrenome: sobrenome.value,
-        telefone: telefone.value
+    if(nome.value != '' && telefone.value != '' ){
+        let contato = {
+            nome: nome.value,
+            sobrenome: sobrenome.value,
+            telefone: telefone.value
+        }
+        contatos.push(contato)
+        adicionarContatoNaTabela()
+        nome.value = ''
+        sobrenome.value = ''
+        telefone.value = ''
     }
-    contatos.push(contato)
-    nome.value = ''
-    sobrenome.value = ''
-    telefone.value = ''
-    mostrarcontato()
 }
 
-function mostrarcontato() {
-    ctt.innerHTML = '<h1>Contatos</h1>'
-    for(let i=0; i<contatos.length;i++){
-        let contat0 = contatos[i]
-        let criar = document.createElement('div')
-        criar.textContent = `Nome: ${contat0.nome}, Sobrenome: ${contat0.sobrenome}, Telefone: ${contat0.telefone}`
-        ctt.appendChild(criar)
+function adicionarContatoNaTabela() {
+    const table = document.getElementById('table')
+    const tableRow = document.createElement('tr')
+
+    const tdNome = document.createElement('td');
+    const tdTelefone = document.createElement('td')
+    const tdSobrenome = document.createElement('td')
+
+    if(nome.value != '' && telefone.value != '' ){
+        tdNome.textContent = nome.value;
+        tdTelefone.textContent = telefone.value;
+        tdSobrenome.textContent = sobrenome.value;
+        
+        tableRow.appendChild(tdNome)
+        tableRow.appendChild(tdSobrenome)
+        tableRow.appendChild(tdTelefone)
+
+        table.appendChild(tableRow)
     }
 }
